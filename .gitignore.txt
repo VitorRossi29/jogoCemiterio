@@ -1,1 +1,18 @@
-git rm --cached -r JogoTecProg/
+# Ignorar a biblioteca SFML
+SFML-2.6.2/
+
+# Ignorar pastas de Build do Visual Studio
+x64/
+Debug/
+Release/
+
+# Ignorar arquivos de usuário do Visual Studio
+*.vcxproj.user
+*.sln.suo
+
+# Ignorar arquivos de saída (executáveis, etc)
+*.exe
+*.dll
+*.lib
+*.pdb
+*.obj
