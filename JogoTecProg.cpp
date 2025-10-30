@@ -4,6 +4,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+using namespace std;
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
@@ -23,6 +25,8 @@ int main()
         window.draw(shape);
         window.display();
     }
+
+    cout << "ola mundo" << endl;
 
     return 0;
 }
