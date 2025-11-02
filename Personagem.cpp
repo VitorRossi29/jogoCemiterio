@@ -1,9 +1,8 @@
 #include "Personagem.h"
 
-CaveiraDeCristal::Entidades::Personagens::Personagem::Personagem(const sf::Vector2f posicao, const sf::Vector2f tamanho, const float velo) :
-	corpo(sf::RectangleShape(tamanho))
+CaveiraDeCristal::Entidades::Personagens::Personagem::Personagem(const sf::Vector2f posicao, const sf::Vector2f tamanho, const float velo, IDs::ID id = IDs::ID::vazio) :
+	Entidade(posicao, tamanho, id)
 {
-	corpo.setPosition(posicao);
 	vel = sf::Vector2f(velo, velo);
 	podeAndar = false;
 	paraEsquerda = false;
@@ -14,10 +13,10 @@ CaveiraDeCristal::Entidades::Personagens::Personagem::Personagem(const sf::Vecto
 CaveiraDeCristal::Entidades::Personagens::Personagem::~Personagem()
 {}
 
-const sf::RectangleShape CaveiraDeCristal::Entidades::Personagens::Personagem::getCorpo() const
+/*const sf::RectangleShape CaveiraDeCristal::Entidades::Personagens::Personagem::getCorpo() const
 {
 	return corpo;
-}
+}*/
 
 void CaveiraDeCristal::Entidades::Personagens::Personagem::andar(const bool paraEsquerda)
 {
@@ -38,7 +37,7 @@ void CaveiraDeCristal::Entidades::Personagens::Personagem::Personagem::atualizar
 	float deltaEspaco = vel.x * deltaTempo;
 	if (paraEsquerda)
 	{
-		deltaEspaco = -deltaEspaco;
+		deltaEspaco *= -1;
 	}
 	corpo.move(deltaEspaco, 0.0f);
 }

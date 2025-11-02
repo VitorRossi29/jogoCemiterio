@@ -8,22 +8,15 @@ namespace CaveiraDeCristal
 		class Elemento
 		{
 		private:
-			Elemento<TE>* pProximo;
-			TE* elemento;
+			Elemento<TE>* proximo;
+			TE* objetoApontado;
 		public:
-			Elemento();
+			Elemento(TE* apontado);
 			~Elemento();
-			void setProximo(Elemento<TE>* proximo);
-			Elemento<TE>* getProximo() const;
-			void setElemento(TE* novoElemento);
-			TE* getElemento() const;
+			void setProximo(Elemento<TE>* seraProximo);
+			const Elemento<TE>* getProximo() const;
+			const TE* getApontado () const;
 		};
-
-		template <class TE>
-		Elemento<TE>::Elemento() :
-			pProximo(nullptr),
-			elemento(nullptr)
-		{}
 	}
 }
 

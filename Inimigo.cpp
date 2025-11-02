@@ -1,24 +1,28 @@
 #include "Inimigo.h"
 
 CaveiraDeCristal::Entidades::Personagens::Inimigo::Inimigo(const sf::Vector2f pos, const sf::Vector2f tam, CaveiraDeCristal::Entidades::Personagens::Jogador* jog, const float velo) :
-	Personagem(pos, tam, velo)
+	Personagem(pos, tam, velo, IDs::ID::plataforma)
 {
 	jogador = jog;
 	corpo.setFillColor(sf::Color::Red);
 	moveAleatorio = rand() % 2;
 	relogioAleatorio.restart();
-
 }
 
 CaveiraDeCristal::Entidades::Personagens::Inimigo::~Inimigo()
-{ }
+{}
 
-void CaveiraDeCristal::Entidades::Personagens::Inimigo::atualizar()
+void CaveiraDeCristal::Entidades::Personagens::Inimigo::executar()
+{
+	mover();
+}
+
+void CaveiraDeCristal::Entidades::Personagens::Inimigo::mover()
 {
 	sf::Vector2f posJogador = jogador->getCorpo().getPosition();
 	sf::Vector2f posInimigo = corpo.getPosition();
 
-	if (fabs(posJogador.x - posInimigo.x) <= RAIO_PERSEGUIR_X && fabs(posJogador.y - posInimigo.x <= RAIO_PERSEGUIR_Y))
+	if (fabs(posJogador.x - posInimigo.x) <= RAIO_PERSEGUIR_X && fabs(posJogador.y - posInimigo.y <= RAIO_PERSEGUIR_Y))
 	{
 		persegueJogador(posJogador, posInimigo);
 	}
@@ -35,13 +39,14 @@ void CaveiraDeCristal::Entidades::Personagens::Inimigo::atualizar()
 
 void CaveiraDeCristal::Entidades::Personagens::Inimigo::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
 {
+	bool esquerda = true;
 	if (posJogador.x > posInimigo.x)
 	{
-		andar(false);
+		andar(!esquerda);
 	}
 	else if (posJogador.x < posInimigo.x)
 	{
-		andar(true);
+		andar(esquerda);
 	}
 	else
 	{
@@ -51,13 +56,14 @@ void CaveiraDeCristal::Entidades::Personagens::Inimigo::persegueJogador(sf::Vect
 
 void CaveiraDeCristal::Entidades::Personagens::Inimigo::movimentoAleatorio()
 {
+	bool esquerda = true;
 	switch (moveAleatorio)
 	{
 	case 0 :
-		andar(false);
+		andar(!esquerda);
 		break;
 	case 1 :
-		andar(true);
+		andar(esquerda);
 		break;
 	default :
 		break;

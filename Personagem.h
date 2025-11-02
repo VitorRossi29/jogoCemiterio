@@ -12,18 +12,17 @@ namespace CaveiraDeCristal
 			class Personagem : public Entidade 
 			{
 			protected:
-				sf::RectangleShape corpo;
 				sf::Vector2f vel;
 				bool podeAndar;
 				bool paraEsquerda;
 				sf::Clock relogioMovimento;
 				float deltaTempo;
 			public:
-				Personagem(const sf::Vector2f posicao, const sf::Vector2f tamanho, const float velo);
+				Personagem(const sf::Vector2f posicao, const sf::Vector2f tamanho, const float velo, IDs::ID id = IDs::ID::vazio);
 				~Personagem();
 
-				const sf::RectangleShape getCorpo() const;
-				virtual void atualizar() = 0;
+				//const sf::RectangleShape getCorpo() const;
+				virtual void executar () = 0;
 
 				void andar(const bool paraEsquerda);
 				void parar();

@@ -1,6 +1,7 @@
 #include "GerColisao.h"
 
-CaveiraDeCristal::Gerenciadores::GerColisao::GerColisao(Lista::ListaEntidades* listaPersonagens, Lista::ListaEndidades* listaPlataformas)
+
+CaveiraDeCristal::Gerenciadores::GerColisao::GerColisao(Listas::ListaEntidade* listaPersonagens, Listas::ListaEntidade* listaPlataformas) :
 	listaPersonagens(listaPersonagens),
 	listaPlataformas(listaPlataformas)
 {
@@ -21,32 +22,34 @@ CaveiraDeCristal::Gerenciadores::GerColisao::~GerColisao()
 	}
 }
 
-const sf::Vector2f CaveiraDeCristal::Gerenciadores::GerColisao::verificarColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2)
+const CaveiraDeCristal::Gerenciadores::GerColisao::ResultadoColisao CaveiraDeCristal::Gerenciadores::GerColisao::testaSobreposicao(Entidades::Entidade* objA, Entidades::Entidade* objB)
 {
-	sf::Vector2f pos1 = ent1->getPos();
-	sf::Vector2f pos2 = ent2->getPos();
+	ResultadoColisao colisao;
+	colisao.colidiu = false;
 
-	sf::Vector2f tam1 = ent1->getTam();
-	sf::Vector2f tam2 = ent2->getTam();
+	//para verificar a sobreposicao, deve-se encontrar a distancia entre os centros dos objetos, em x e y
 
-	sf::Vector2f distanciaDosCentros
-		(
-			fabs((pos1.x + tam1.x / 2.0f) - (pos2.x + tam2.x / 2.0f)),
-			fabs((pos1.y + tam1.y / 2.0f) - (pos2.y + tam2.y / 2.0f))
-		);
+	colisao.sobreposicao.x = fabs(objA->getPosicao().x - objB->getPosicao().x);
+	//aqui obtida a distancia entre os centros dos objetos em x
 
-	sf::Vector2f somaMetades
-		(
-			(tam1.x / 2.0f) + (tam2.x / 2.0f),
-			(tam1.y / 2.0f) + (tam2.y / 2.0f)
-		);
+	colisao.sobreposicao.x -= (objA->getTamanho().x + objB->getTamanho().x) / 2;
+	//a distancia é reduzida pelo tamanho dos objetos, se estiverem sobrepostos, sera negativo
 
-	return sf::Vector2f(distanciaDosCentros.x - somaMetades.x, distanciaDosCentros.y - somaMetades.y);
+	colisao.sobreposicao.y = fabs(objA->getPosicao().y - objB->getPosicao().y);
+	//mesma coisa para y
+	colisao.sobreposicao.y -= (objA->getTamanho().y + objB->getTamanho().y) / 2;
+
+	if (colisao.sobreposicao.x < 0.0f && colisao.sobreposicao.y < 0.0f)
+		colisao.colidiu = true;
+
+	return colisao;
 }
 
 void CaveiraDeCristal::Gerenciadores::GerColisao::executar()
 { 
 	int i, j;
+
+	//funcao similar ao codigo do ex-monitor Giovane Limas Salvi
 
 	// Aqui se verifica a colisao entre dois personagens
 
@@ -56,10 +59,10 @@ void CaveiraDeCristal::Gerenciadores::GerColisao::executar()
 		for (j = i + 1; j < listaPersonagens->getTam(); j++)
 		{
 			Entidades::Entidade* ent2 = listaPersonagens->operator[](j);
-			sf::Vector2f distancia = verificarColisao(ent1, ent2);
-			if(distancia.x < 0.0f && distancia.y < 0.0f)
+			ResultadoColisao colisao = testaSobreposicao(ent1, ent2);
+			if(colisao.colidiu)
 			{
-				ent1->colisao(ent2);
+				ent1->colisao(ent2, colisao.sobreposicao);
 			}
 		}
 	}
@@ -74,12 +77,13 @@ void CaveiraDeCristal::Gerenciadores::GerColisao::executar()
 		Entidades::Entidade* ent1 = listaPersonagens->operator[](i);
 		for(j = 0; j < listaPlataformas->getTam(); j++)
 		{
-			Entidades::Entidade* ent2 = listaPlataformas->operator[](j);
-			sf::Vector2f distancia = distancia.y < 0.0f)
+			Entidades::Entidade* ent2 = listaPlataformas->operator[](j);;
+			ResultadoColisao colisao = testaSobreposicao(ent1, ent2);
+			if(colisao.colidiu)
 			{
 				if (ent2->getID() == IDs::IDs::plataforma)
 				{
-					ent2->colisao(ent1, colidir);
+					ent2->colisao(ent1);
 				}
 				
 				else
@@ -90,3 +94,4 @@ void CaveiraDeCristal::Gerenciadores::GerColisao::executar()
 		}
 	}
 }
+

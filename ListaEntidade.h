@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Lista.h"
+#include "Entidade.h"
+#include "GerGrafico.h"
 
 namespace CaveiraDeCristal
 {
@@ -9,7 +11,7 @@ namespace CaveiraDeCristal
 		class ListaEntidade
 		{
 		private:
-			Lista<CaveiraDeCristal::Entidades::Entidade*> objListaEntidade;
+			Lista<CaveiraDeCristal::Entidades::Entidade*> listaParametrizada;
 		public:
 			ListaEntidade();
 			~ListaEntidade();
@@ -18,7 +20,7 @@ namespace CaveiraDeCristal
 			void removerEntidade(int posicao);
 			CaveiraDeCristal::Entidades::Entidade* operator[](int indice);
 			const int getTam() const;
-			void executar(sf::RenderWindow* window);
+			void executar(CaveiraDeCristal::Gerenciadores::GerGrafico* grafico);
 		};
 	}
 }

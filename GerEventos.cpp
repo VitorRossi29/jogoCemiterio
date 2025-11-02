@@ -14,9 +14,7 @@ CaveiraDeCristal::Gerenciadores::GerEventos::GerEventos() :
 	}
 }
 
-CaveiraDeCristal::Gerenciadores::GerEventos::~GerEventos()
-{
-}
+CaveiraDeCristal::Gerenciadores::GerEventos::~GerEventos() {}
 
 CaveiraDeCristal::Gerenciadores::GerEventos* CaveiraDeCristal::Gerenciadores::GerEventos::getGerEventos()
 {
@@ -49,6 +47,11 @@ void CaveiraDeCristal::Gerenciadores::GerEventos::verificaTeclaPressionada(sf::K
 	{
 		pGrafico->fecharJanela();
 	}
+
+	/*
+	Jogador 1 se move com A e D, pula com W e ataca com S
+	Jogador 2 se move com <- e ->, pula com seta pra cima e ataca com seta pra baixo
+	*/
 }
 
 void CaveiraDeCristal::Gerenciadores::GerEventos::verificaTeclaSolta(sf::Keyboard::Key tecla)

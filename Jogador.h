@@ -15,8 +15,9 @@ namespace CaveiraDeCristal
 			public:
 				Jogador(const sf::Vector2f posicao, const sf::Vector2f tamanho, const float vel);
 				~Jogador();
-				void atualizar();
-				void colisao() {}
+
+				void executar ();
+				void colisao(Entidade* colidido, sf::Vector2f colisao);
 			};
 		}
 	}

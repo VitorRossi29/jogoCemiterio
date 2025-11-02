@@ -1,15 +1,48 @@
 #include "ListaEntidade.h"
 
 
-void CaveiraDeCristal::Listas::ListaEntidade::executar(sf::RenderWindow* window)
+CaveiraDeCristal::Listas::ListaEntidade::ListaEntidade() :
+	listaParametrizada()
+{}
+
+CaveiraDeCristal::Listas::ListaEntidade::~ListaEntidade()
+{}
+
+
+void CaveiraDeCristal::Listas::ListaEntidade::addEntidade(CaveiraDeCristal::Entidades::Entidade* entidade)
 {
-	int tamanho = objListaEntidade.getTam();
-	CaveiraDeCristal::Entidades::Entidade* aux = nullptr;
+	listaParametrizada.adicionarNoFim(entidade);
+}
+
+void CaveiraDeCristal::Listas::ListaEntidade::removerEntidade(CaveiraDeCristal::Entidades::Entidade* entidade)
+{
+	listaParametrizada.removerElemento(entidade);
+}
+void CaveiraDeCristal::Listas::ListaEntidade::removerEntidade(int posicao)
+{
+	listaParametrizada.removerElemento(posicao);
+}
+
+CaveiraDeCristal::Entidades::Entidade* CaveiraDeCristal::Listas::ListaEntidade::operator[](int indice)
+{
+	return listaParametrizada.operator[](indice);
+}
+
+const int CaveiraDeCristal::Listas::ListaEntidade::getTam() const
+{
+	return listaParametrizada.getTam();
+}
+
+void CaveiraDeCristal::Listas::ListaEntidade::executar(CaveiraDeCristal::Gerenciadores::GerGrafico* grafico)
+{
+	int tamanho = listaParametrizada.getTam();
+	CaveiraDeCristal::Entidades::Entidade* navegador = nullptr;
+	
 	int i;
-	for(i = 0; i < this->getTam(); i++)
+	for(i = 0; i < tamanho; i++)
 	{
-		aux = objListaEntidade.operator[](i);
-		aux->atualizar();
-		window->draw(aux->getCorpo());
+		navegador = listaParametrizada.operator[](i);
+		navegador->executar();
+		grafico->desenhaElemento(navegador->getCorpo());
 	}
 }

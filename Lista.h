@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Elemento.hpp"
+#include "Elemento.h"
 
 namespace CaveiraDeCristal
 {
@@ -10,26 +10,18 @@ namespace CaveiraDeCristal
 		class Lista
 		{
 		private:
-			Elemento<TL>* pPrimeiro;
-			Elemento<TL>* pUltimo;
+			Elemento<TL>* primeiro;
+			Elemento<TL>* ultimo;
 			unsigned int tamanho;
 		public:
 			Lista();
 			~Lista();
-			void addElemento(TL* novoElemento);
-			void removerElemento(TL* elemento);
+			void adicionarNoFim(TL novoElemento);
+			void removerElemento(TL removido);
 			void removerElemento(int posicao);
 			const int getTam() const;
-			TL* operator[](int posicao);
+			TL operator[](int posicao);
 		};
-
-		template <class TL>
-		Lista<TL>::Lista() :
-			pPrimeiro(nullptr),
-			pUltimo(nullptr),
-			tamanho(0)
-		{
-		}
 	}
 }
 

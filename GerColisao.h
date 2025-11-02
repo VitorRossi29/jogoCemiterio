@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include<cmath>
-#include "ListaEntidades.h"
+#include "ListaEntidade.h"
 
 namespace CaveiraDeCristal
 {
@@ -11,12 +11,18 @@ namespace CaveiraDeCristal
 		class GerColisao
 		{
 		private:
-			Lista::ListaEntidades* listaPersonagens;
-			Lista::ListaEndidades* listaPlataformas;
+			Listas::ListaEntidade* listaPersonagens;
+			Listas::ListaEntidade* listaPlataformas;
 		public:
-			GerColisao(Lista::ListaEntidades* listaPersonagens, Lista::ListaEndidades* listaPlataformas);
+
+			struct ResultadoColisao {
+				bool colidiu = false;
+				sf::Vector2f sobreposicao = { 0.f, 0.f };
+			};
+
+			GerColisao(Listas::ListaEntidade* listaPersonagens, Listas::ListaEntidade* listaPlataformas);
 			~GerColisao();
-			const sf::Vector2f verificarColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2);
+			const ResultadoColisao testaSobreposicao(Entidades::Entidade* objA, Entidades::Entidade* objB);
 			void executar();
 		};
 	}

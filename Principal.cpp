@@ -44,11 +44,12 @@ void CaveiraDeCristal::Principal::instanciaEntidades()
 
 void CaveiraDeCristal::Principal::executar()
 {
+	//trecho similar ao codigo do ex-monitor Giovane Limas Salvi
 	while (pGrafico->verificaAbertura())
 	{
 		pEvento->executar();
 		pGrafico->limpaJanela();
-		listaEntidades.executar(pGrafico->getWindow());
+		listaEntidades.executar(pGrafico->getGerGrafico());
 		pGrafico->mostraElementos();
 	}
 }
