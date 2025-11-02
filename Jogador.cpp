@@ -1,0 +1,41 @@
+#include "Jogador.h"
+
+Jogador::Jogador() : Personagem() , pontos(0) 
+{
+}
+
+Jogador::~Jogador() { pontos = 0; }
+
+void Jogador::executar () {}
+
+void Jogador::salvar() {}
+
+void Jogador::mover(int direc) 
+{
+    if (direc == 1)
+    {
+        body.move(sf::Vector2f(-velocidade, 0));
+    }
+    else if (direc == 2)
+    {
+        body.move(sf::Vector2f(velocidade, 0));
+    }
+    else if (direc == 3)
+    {
+        body.move(sf::Vector2f(0, -velocidade));
+    }
+    else
+    {
+        body.move(sf::Vector2f(0, velocidade));
+    }
+}
+
+void Personagem::setVelocidade(float vel)
+{
+    velocidade = vel;
+}
+
+void Jogador::setTextura(sf::Texture* text)
+{
+	body.setTexture(text);
+}

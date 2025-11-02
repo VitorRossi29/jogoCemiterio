@@ -2,11 +2,9 @@
 #include "Entidade.h"
 
 Jogo::Jogo() : 
-window(sf::VideoMode(1000, 600), "Jogo TecProg", sf::Style::Close),
-shape(sf::Vector2f(100.f, 100.f))
+window(sf::VideoMode(1000, 600), "Jogo TecProg", sf::Style::Close)
 {
-	textura_jogador2.loadFromFile("Assets/Imagens/cacadorLongo.png");
-	shape.setTexture(&textura_jogador2);
+    textura_jogador2.loadFromFile("Assets/Imagens/esqueleto_d.png");
     executar();
 }
 
@@ -14,6 +12,10 @@ Jogo::~Jogo() {}
 
 void Jogo::executar()
 {
+    pJog1.setWindow(&window);
+    pJog1.setTextura(&textura_jogador2);
+    pJog1.setVelocidade(0.1);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -25,23 +27,23 @@ void Jogo::executar()
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            shape.move(sf::Vector2f(-0.2f, 0));
+            pJog1.mover(1);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            shape.move(sf::Vector2f(0.2f, 0));
+            pJog1.mover(2);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            shape.move(sf::Vector2f(0, -0.2f));
+            pJog1.mover(3);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            shape.move(sf::Vector2f(0, 0.2f));
+            pJog1.mover(4);
         }
 
         window.clear();
-        window.draw(shape);
+        pJog1.draw();
         window.display();
     }
 
