@@ -11,7 +11,7 @@ private:
     // ...
     
     sf::RenderWindow window;
-    sf::Texture textura_jogador2; 
+  
 public:
     Jogo();
     ~Jogo();

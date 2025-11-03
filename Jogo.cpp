@@ -4,7 +4,6 @@
 Jogo::Jogo() : 
 window(sf::VideoMode(1000, 600), "Jogo TecProg", sf::Style::Close)
 {
-    textura_jogador2.loadFromFile("Assets/Imagens/esqueleto_d.png");
     executar();
 }
 
@@ -13,7 +12,6 @@ Jogo::~Jogo() {}
 void Jogo::executar()
 {
     pJog1.setWindow(&window);
-    pJog1.setTextura(&textura_jogador2);
     pJog1.setVelocidade(0.1);
 
     while (window.isOpen())

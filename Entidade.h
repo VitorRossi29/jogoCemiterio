@@ -1,13 +1,16 @@
 #pragma once
+#include "Ente.h"
 
 #include <SFML/Graphics.hpp>
 
-class Entidade
+class Entidade : public Ente
 {
 protected:
 	int x;
 	int y;
 	sf::RectangleShape body;
+	sf::Texture texturaEsquerda;
+	sf::Texture texturaDireita;
 	sf::RenderWindow* window;
 	// ostream "buffer" tirar aspas depois;
 	void salvarDataBuffer(); // Impementar depois
