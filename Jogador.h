@@ -16,4 +16,3 @@ public:
     void setTextura(sf::Texture* text);
     // ...
 };
-

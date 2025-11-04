@@ -3,8 +3,7 @@
 
 class Jogador;
 
-class Plataforma :
-    public Obstaculo
+class Plataforma : public Obstaculo
 {
 private:
     int altura;

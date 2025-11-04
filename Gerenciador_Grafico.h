@@ -1,9 +1,11 @@
 #pragma once
+
+#include <SFML/Graphics.hpp>
 #include "Ente.h"
 
 class Gerenciador_Grafico {
 private:
-    // BiblioGrafica obj;  
+    sf::RenderWindow window;
     // outros atributos se necessário
 
 public:

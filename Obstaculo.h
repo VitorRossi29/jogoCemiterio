@@ -1,9 +1,6 @@
 #pragma once
 #include "Entidade.h"
-namespace Jogo
-{
-    namespace Entidades
-    {
+
         class Jogador; // Declaração forward para evitar inclusão circular
 
         class Obstaculo : public Entidade 
@@ -26,6 +23,4 @@ namespace Jogo
             // Método virtual puro (abstrato) específico de Obstaculo
             virtual void obstaculizar(Jogador* p) = 0;
         };  
-    }
-}
 
