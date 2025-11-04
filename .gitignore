@@ -17,8 +17,4 @@ Release/
 *.pdb
 *.obj
 
-
 .vs/
-JogoTecProg.sln
-JogoTecProg.vcxproj
-JogoTecProg.vcxproj.filters
